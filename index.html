@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +6,72 @@
     <title>Neon Warden</title>
   </head>
   <body>
+    <main class="cabinet" id="cabinet" data-mode="title">
+      <!-- left panel: score, best, hull, cannon -->
+      <aside class="panel panel-left" aria-label="Ship status">
+        <section class="readout">
+          <h2>Score</h2>
+          <output id="score">0000000</output>
+        </section>
+        <section class="readout">
+          <h2>Best</h2>
+          <output id="best">0000000</output>
+        </section>
+        <section class="readout">
+          <h2>Hull</h2>
+          <div class="pips" id="lives">
+            <span class="pip lit"></span>
+            <span class="pip lit"></span>
+            <span class="pip lit"></span>
+          </div>
+        </section>
+        <section class="readout">
+          <h2>Cannon</h2>
+          <div class="cells" id="power">
+            <span class="cell lit"></span>
+            <span class="cell"></span>
+            <span class="cell"></span>
+          </div>
+        </section>
+        <p class="badge">Self-play</p>
+      </aside>
+
+      <!-- middle: the game canvas goes in #game, with the banner and caption on top -->
+      <div class="screen">
+        <div id="game"></div>
+        <div class="banner" id="banner">
+          <strong></strong>
+          <span></span>
+        </div>
+        <p class="caption" id="caption"></p>
+      </div>
+
+      <!-- right panel: route and boss meter -->
+      <aside class="panel panel-right" aria-label="Route">
+        <h2>Route</h2>
+        <ol class="route" id="route"></ol>
+        <section class="boss" id="boss" hidden>
+          <h2>Warden</h2>
+          <div class="boss-meter">
+            <span id="boss-fill"></span>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <p class="help">
+      Arrows or WASD to fly · Space or Z to fire · Wait at the title for
+      self-play
+    </p>
+
+    <!-- one route stop; hud.ts clones it once per sector -->
+    <template id="stop-template">
+      <li class="stop" data-state="ahead">
+        <span class="stop-dot"></span>
+        <span class="stop-name"></span>
+      </li>
+    </template>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
