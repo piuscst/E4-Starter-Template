@@ -7,15 +7,13 @@ import {
   Player,
   WIDTH,
 } from "./actors.ts";
+import { CLEAR_GRACE_TICKS, layout, type Sector, SECTORS } from "./route.ts";
 import {
-  CLEAR_GRACE_TICKS,
-  ENEMIES,
   type EnemyKind,
-  layout,
-  type Sector,
-  SECTORS,
-} from "./route.ts";
-import { ShmupBoss, ShmupPowerUp, ShmupPrefabSprite } from "./prefab.ts";
+  ShmupBoss,
+  ShmupPowerUp,
+  ShmupPrefabSprite,
+} from "./prefab.ts";
 import type { Hud } from "./hud.ts";
 import type { LaunchOptions } from "./main.ts";
 import { AutoPilot, KeyboardPilot, type Pilot } from "./pilots.ts";
@@ -419,23 +417,7 @@ export class GameScene extends Phaser.Scene implements Arena {
     y: number,
     side: number,
   ): void {
-    const s = ENEMIES[kind];
-    this.enemies.push(
-      new ShmupPrefabSprite(
-        this,
-        x,
-        y,
-        kind,
-        s.hp,
-        s.score,
-        s.radius,
-        s.dropChance,
-        s.canShoot,
-        false,
-        x,
-        side,
-      ),
-    );
+    this.enemies.push(new ShmupPrefabSprite(this, kind, x, y, side));
   }
 
   private startBoss(): void {
